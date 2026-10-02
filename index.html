@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Free Fire Like Booster Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #030712;
+    position: fixed;
+  }
+
+  #bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .card {
+    position: relative;
+    z-index: 2;
+    width: min(420px, 100%);
+    padding: 18px 18px;
+    border-radius: 20px;
+    background: rgba(10, 16, 31, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8),
+                0 0 25px rgba(0, 217, 255, 0.15);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #00d9ff, #0055ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+  }
+
+  .status-online {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background: rgba(0, 255, 170, 0.08);
+    border: 1px solid rgba(0, 255, 170, 0.25);
+    color: #00ffaa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin: 0 auto 10px;
+    font-family: 'Orbitron', sans-serif;
+    width: fit-content;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00ffaa;
+    box-shadow: 0 0 6px #00ffaa;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .form-group {
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .input-field, .select-field {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 217, 255, 0.25);
+    background: rgba(5, 9, 20, 0.7);
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .input-field:focus, .select-field:focus {
+    border-color: #00d9ff;
+    background: rgba(5, 9, 20, 0.9);
+  }
+
+  .select-field option {
+    background: #0d1322;
+    color: #fff;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #00d9ff, #0055ff);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    margin-top: 4px;
+    box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: transform 0.15s ease;
+  }
+
+  .btn-submit:active {
+    transform: scale(0.95);
+  }
+
+  .btn-submit:hover,
+  .btn-submit:focus {
+    background: linear-gradient(90deg, #00d9ff, #0055ff) !important;
+    box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3) !important;
+    outline: none !important;
+  }
+
+  .response-box {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(5, 9, 20, 0.85);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    text-align: left;
+    display: block;
+  }
+
+  .status-badge {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    background: rgba(0, 217, 255, 0.12);
+    color: #00d9ff;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+  }
+
+  .status-success {
+    background: rgba(0, 255, 128, 0.12) !important;
+    color: #00ff80 !important;
+    border: 1px solid rgba(0, 255, 128, 0.3) !important;
+  }
+
+  .status-failed {
+    background: rgba(255, 50, 80, 0.12) !important;
+    color: #ff3250 !important;
+    border: 1px solid rgba(255, 50, 80, 0.3) !important;
+  }
+
+  .res-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    padding: 4px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  .res-item:last-child { border-bottom: none; }
+  .res-label { color: #94a3b8; font-weight: 600; }
+  .res-val { color: #ffffff; font-weight: 700; font-family: 'Consolas', monospace; }
+  .highlight-add { color: #00ff80; font-size: 12.5px; }
+
+  .channel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s ease;
+  }
+  .channel:active {
+    transform: scale(0.98);
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<main class="card">
+  <h1 class="title">Free Fire Like</h1>
+  <div class="status-online"><span class="dot"></span>SYSTEM ONLINE</div>
+
+  <div class="form-group">
+    <label for="uid">Player UID</label>
+    <input type="number" id="uid" class="input-field" placeholder="Ex: 2884129983" required>
+  </div>
+
+  <div class="form-group">
+    <label for="key">API Key</label>
+    <input type="text" id="key" class="input-field" placeholder="Enter License Key" required>
+  </div>
+
+  <div class="form-group">
+    <label for="server">Server Region</label>
+    <select id="server" class="select-field">
+      <option value="bd">BD (Bangladesh)</option>
+      <option value="ind">IND (India)</option>
+      <option value="sg">SG (Singapore)</option>
+      <option value="br">BR (Brazil)</option>
+      <option value="me">ME (Middle East)</option>
+    </select>
+  </div>
+
+  <button class="btn-submit" id="btnSubmit" onclick="sendLike()">❤️ SEND LIKE</button>
+
+  <div class="response-box" id="responseBox">
+    <div id="statusBadge" class="status-badge">READY TO PROCESS</div>
+    <div class="res-item"><span class="res-label">Player Name</span> <span class="res-val" id="resName">-</span></div>
+    <div class="res-item"><span class="res-label">Player UID</span> <span class="res-val" id="resUid">-</span></div>
+    <div class="res-item"><span class="res-label">Likes Before</span> <span class="res-val" id="resBefore">-</span></div>
+    <div class="res-item"><span class="res-label">Likes Added</span> <span class="res-val highlight-add" id="resAdded">-</span></div>
+    <div class="res-item"><span class="res-label">Current Likes</span> <span class="res-val" id="resCurrent">-</span></div>
+    <div class="res-item"><span class="res-label">Remaining Limits</span> <span class="res-val" id="resRemain">-</span></div>
+  </div>
+
+  <a class="channel" href="https://t.me/kodexofc" target="_blank">✈ TELEGRAM CHANNEL</a>
+</main>
+
+<script>
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const particleCount = 75;
+
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+}
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 2.5;
+    this.vy = (Math.random() - 0.5) * 2.5;
+    this.radius = Math.random() * 2 + 1;
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#00d9ff';
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = '#00d9ff';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+}
+
+window.addEventListener('resize', initCanvas);
+initCanvas();
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(0, 217, 255, ${1 - dist / 120})`;
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+function getVal(obj, ...keys) {
+  if (!obj) return null;
+  for (let key of keys) {
+    if (obj[key] !== undefined && obj[key] !== null) return obj[key];
+  }
+  return null;
+}
+
+async function sendLike() {
+  const uid = document.getElementById('uid').value.trim();
+  const key = document.getElementById('key').value.trim();
+  const server = document.getElementById('server').value;
+  const statusBadge = document.getElementById('statusBadge');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  if (!uid || !key) {
+    alert("অনুগ্রহ করে UID এবং API Key দুটোই লিখুন!");
+    return;
+  }
+
+  btnSubmit.disabled = true;
+  btnSubmit.style.opacity = "0.8";
+  btnSubmit.textContent = "PROCESSING...";
+
+  statusBadge.className = 'status-badge';
+  statusBadge.style.background = 'rgba(0, 217, 255, 0.15)';
+  statusBadge.style.color = '#00d9ff';
+  statusBadge.style.border = '1px solid rgba(0, 217, 255, 0.3)';
+  statusBadge.textContent = "⏳ SENDING REQUEST...";
+
+  const url = `/like?uid=${encodeURIComponent(uid)}&server_name=${encodeURIComponent(server)}&key=${encodeURIComponent(key)}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const targetData = data.data || data.result || data;
+
+    const statusVal = getVal(data, 'status', 'Status', 'code');
+
+    // Status Check Logic: 1 = Success, 2/Others = Failed
+    if (statusVal == 1 || statusVal == "1" || statusVal == "success") {
+      statusBadge.className = 'status-badge status-success';
+      statusBadge.textContent = "✅ LIKE SENT SUCCESSFULLY";
+    } else {
+      statusBadge.className = 'status-badge status-failed';
+      statusBadge.textContent = "❌ LIKE SEND FAILED";
+    }
+
+    const name = getVal(targetData, 'PlayerNickname', 'Name', 'name', 'player_name') || "N/A";
+    const resUid = getVal(targetData, 'UID', 'Uid', 'uid', 'player_uid') || uid;
+    const before = getVal(targetData, 'LikesbeforeCommand', 'Like_before', 'like_before') ?? "0";
+    const added = getVal(targetData, 'LikesGivenByAPI', 'Like_added', 'like_added') ?? "0";
+    const current = getVal(targetData, 'LikesafterCommand', 'Current_like', 'current_like') ?? "0";
+    const remain = getVal(targetData, 'remains', 'Remain', 'remain') || "0";
+
+    document.getElementById('resName').textContent = name;
+    document.getElementById('resUid').textContent = resUid;
+    document.getElementById('resBefore').textContent = before;
+    document.getElementById('resAdded').textContent = "+" + added;
+    document.getElementById('resCurrent').textContent = current;
+    document.getElementById('resRemain').textContent = remain;
+
+  } catch (error) {
+    statusBadge.className = 'status-badge status-failed';
+    statusBadge.textContent = "❌ CONNECTION ERROR";
+    
+    document.getElementById('resName').textContent = "API Error";
+    document.getElementById('resUid').textContent = uid;
+    document.getElementById('resBefore').textContent = "N/A";
+    document.getElementById('resAdded').textContent = "+0";
+    document.getElementById('resCurrent').textContent = "N/A";
+    document.getElementById('resRemain').textContent = "N/A";
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.style.opacity = "1";
+    btnSubmit.textContent = "❤️ SEND LIKE";
+  }
+}
+</script>
+
+</body>
+</html>
