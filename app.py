@@ -47,7 +47,7 @@ URLS = {
     "BD":  "https://clientbp.ppmainecoonghj.com",
     "RU":  "https://client.ru.freefiremobile.com",
 }
-JWT_API = "https://jwt39.vercel.app/token"
+JWT_API = "https://jwtofc.vercel.app/token"
 
 UA = "UnityPlayer/2018.4.12f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)"
 XGA_SV = "1789556611"
@@ -469,7 +469,7 @@ def like():
     key = request.args.get("key")
     ip = request.remote_addr
 
-    if key != "xanu":
+    if key != "Luffy":
         return jsonify({"error": "Invalid API key"}), 403
     if not uid or not server:
         return jsonify({"error": "UID and server_name required"}), 400
