@@ -469,7 +469,7 @@ def like():
     key = request.args.get("key")
     ip = request.remote_addr
 
-    if key != "Luffy":
+    if key != "Luff":
         return jsonify({"error": "Invalid API key"}), 403
     if not uid or not server:
         return jsonify({"error": "UID and server_name required"}), 400
